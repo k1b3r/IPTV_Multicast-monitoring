@@ -92,7 +92,8 @@ $v =sprintf("%.2f",$v);
 #------------------------------------
 #warn($v,$id,$link,$interface);
 #------------------------------------
-$sth1 = $dbh->prepare("UPDATE  `chan` SET speed='$v' WHERE id='$id' ");# request
+$epoc = time();
+$sth1 = $dbh->prepare("UPDATE  `chan` SET speed='$v',last_check='$epoc' WHERE id='$id' ");# request
 $sth1->execute;
   
  }

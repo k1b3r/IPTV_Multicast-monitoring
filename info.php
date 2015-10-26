@@ -32,12 +32,12 @@ $time = $utime-$epoc;
   echo "Int <b><font color=\"green\">$interface</font></b>";
   echo "In(Rx)\Out(Tx)<b><font color=\"red\">=$kbitrx\\$kbittx</font></b> Kbit ";
   echo "Average In(Rx)\Out(Tx) <b><font color=\"green\">=$kbitpsrx\\$kbitpstx</font></b> Kbit\s<br>";
-  echo "Last Checked $time seconds ago <br>";
+  echo "Last Checked <b>$time</b> seconds ago <br>";
 }else{
   echo "Int <b><font color=\"green\">eth1</font></b>  ";
   echo "In(Rx)\Out(Tx)<b><font color=\"red\">=updating\\updating</font></b> Kbit ";
   echo "Average In(Rx)\Out(Tx) <b><font color=\"green\">=updating\\updating</font></b> Kbit\s<br>";
-  echo "Last Checked $time seconds ago <br>";
+  echo "Last Checked <b>$time</b> seconds ago <br>";
  }
 }else{
 null;
