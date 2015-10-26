@@ -11,7 +11,7 @@ include("refresh.php");
   <head>
     <meta http-equiv="refresh" content="<?php echo $sec?>;URL='<?php echo $page?>'">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Multicast Diagnostic Page</title>
+    <title>Multicast::Diagnostic::Page</title>
     <style type="text/css" media="screen">
   * {
     margin: 0px 0px 0px 0px;
@@ -199,7 +199,7 @@ include("refresh.php");
       <div class="page_header floating_element">
         <!--<img src="/icons/ubuntu-logo.png" alt="Ubuntu Logo" class="floating_element"/> -->
         <span class="floating_element">
-          Multicast/IPTV Diagnostic Page.
+         <center>Multicast::IPTV::Diagnostic::Page</center>
         </span>
       </div>
       <div class="content_section floating_element">
@@ -207,26 +207,24 @@ include("refresh.php");
 
         <div class="section_header section_header_red">
           <div id="about"></div>
-          Information.
+          Information::
         </div>
         <div class="content_section_text">
-        <?php
-         include("info.php");
-         ?>
+Pages::
         </div>
         <div class="section_header">
           <div id="changes"></div>
-                Configuration Overview
+                Stats::
         </div>
         <div class="content_section_text">
-
-Current  config
-
+       <?php
+         include("info.php");
+         ?>
         </div>
 
         <div class="section_header">
             <div id="docroot"></div>
-                Channels
+                Channels::Stats
         </div>
 
         <div class="content_section_text">
@@ -237,11 +235,11 @@ Current  config
 
         <div class="section_header">
           <div id="bugs"></div>
-                Reporting Problems
+                Reporting::Problems
         </div>
         <div class="content_section_text">
 
-<p> reserver section</p>
+<p> <a href="https://github.com/k1b3r/IPTV_Multicast-monitoring/issues">Open issue on Github</a> </p>
         </div>
 
 
@@ -252,7 +250,7 @@ Current  config
     <div class="validator">
     <p>
 
-k1b3r 2015
+k1b3r::2015
     </p>
     </div>
   </body>
