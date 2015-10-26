@@ -10,7 +10,7 @@ if($lines){
  list($interface,$kbitrx,$kbittx,$kbitpsrx,$kbitpstx) = split (',', $line);
 */
 
-$query='SELECT id,iface,kbitrx,kbittx,kbitpsrx,kbitpstx,use_int FROM int_speed';
+$query='SELECT id,iface,kbitrx,kbittx,kbitpsrx,kbitpstx,last_check,use_int FROM int_speed';
 $q = mysql_query($query);
 if (!$q) {
     die('query error: ' . mysql_error());
@@ -24,17 +24,20 @@ $kbittx= $line[kbittx];
 $kbitpsrx = $line[kbitpsrx];
 $kbitpstx = $line[kbitpstx];
 $use_int = $line[use_int];
+$epoc = $line[last_check];
 if($use_int==1){
 if($interface){
-
-  echo "Int <b><font color=\"green\">$interface</font></b>  ";
+$utime = time();
+$time = $utime-$epoc;
+  echo "Int <b><font color=\"green\">$interface</font></b>";
   echo "In(Rx)\Out(Tx)<b><font color=\"red\">=$kbitrx\\$kbittx</font></b> Kbit ";
   echo "Average In(Rx)\Out(Tx) <b><font color=\"green\">=$kbitpsrx\\$kbitpstx</font></b> Kbit\s<br>";
- 
+  echo "Last Checked $time seconds ago <br>";
 }else{
   echo "Int <b><font color=\"green\">eth1</font></b>  ";
   echo "In(Rx)\Out(Tx)<b><font color=\"red\">=updating\\updating</font></b> Kbit ";
   echo "Average In(Rx)\Out(Tx) <b><font color=\"green\">=updating\\updating</font></b> Kbit\s<br>";
+  echo "Last Checked $time seconds ago <br>";
  }
 }else{
 null;

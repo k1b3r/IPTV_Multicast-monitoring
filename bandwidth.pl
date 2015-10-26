@@ -75,8 +75,8 @@ $kbitpstx =sprintf("%.2f",$kbitpstx);
  # print "Incoming: $kbitrx kbit ($KBrx KB) Average: $kbitpsrx kbps ($KBpsrx KBps)\n";
  # print "Outgoing: $kbittx kbit ($KBtx KB) Average: $kbitpstx kbps ($KBpstx KBps)\n";
 
-
-$sth1 = $dbh->prepare("UPDATE `int_speed` SET iface='$interface',kbitrx='$kbitrx',kbittx='$kbittx',kbitpsrx='$kbitpsrx',kbitpstx='$kbitpstx'  WHERE id='$id'");# request
+$epoc = time();
+$sth1 = $dbh->prepare("UPDATE `int_speed` SET iface='$interface',kbitrx='$kbitrx',kbittx='$kbittx',kbitpsrx='$kbitpsrx',kbitpstx='$kbitpstx',last_check='$epoc'  WHERE id='$id'");# request
 $sth1->execute;
  
 }
