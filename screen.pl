@@ -13,12 +13,7 @@ use Data::Dumper;
 my $host = "127.0.0.1"; # srv
 my $portsql = "3306"; # port
 my $user = "root"; #  user
-my $pass = "xxxxxxxxx"; # pass
-my $db = "diag_mcast"; # database
-my $host = "127.0.0.1"; # srv
-my $portsql = "3306"; # port
-my $user = "root"; #  user
-my $pass = "h0d5ym4m2"; # pass
+my $pass = "xxxxxxxxxxx"; # pass
 my $db = "diag_mcast"; # database
 my $port = 5500;
 $dbh = DBI->connect("DBI:mysql:$db:$host:$portsql",$user,$pass) or print "MySQL connection error $!";
