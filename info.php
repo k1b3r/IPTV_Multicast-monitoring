@@ -24,11 +24,9 @@ $kbittx= $line[kbittx];
 $kbitpsrx = $line[kbitpsrx];
 $kbitpstx = $line[kbitpstx];
 $use_int = $line[use_int];
-$epoc = $line[last_check];
 if($use_int==1){
 if($interface){
-$utime = time();
-$time = $utime-$epoc;
+$time = ($utime=time())-$line[last_check];
   echo "Int <b><font color=\"green\">$interface</font></b>";
   echo "In(Rx)\Out(Tx)<b><font color=\"red\">=$kbitrx\\$kbittx</font></b> Kbit ";
   echo "Average In(Rx)\Out(Tx) <b><font color=\"green\">=$kbitpsrx\\$kbitpstx</font></b> Kbit\s<br>";
