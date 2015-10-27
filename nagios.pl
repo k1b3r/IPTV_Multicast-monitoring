@@ -29,14 +29,37 @@ $sth->execute;
 
 my $count1=0;
 my $count2=0;
+
+my $z2 = 0;
+
+while (($id,$name,$link,$iface,$speed) = $sth->fetchrow_array){
+chomp($id,$name,$link,$iface,$speed);
+if($speed < $sens){
+$z2++;
+ }
+}
+print $z2;
+
+
+$sth->execute;
+my $z1=0;
 while (($id,$name,$link,$iface,$speed) = $sth->fetchrow_array) {
 chomp($id,$name,$link,$iface,$speed);
 #warn($id ,$link);
 if($speed < $sens){
 $count1++;
-open(BAD, ">>api/bad.txt");
-print (BAD "$name\n");
-close BAD;
+$z1++;
+	if($z1 != $z2){
+
+	open(BAD, ">>api/bad.txt");
+	print (BAD "$name,");
+	close BAD;
+        }elsif($z1 == $z2)
+	{
+        open(BAD, ">>api/bad.txt");
+        print (BAD "$name");
+        close BAD;
+	}
 }
 if($speed > $sens){
 $count2++;
