@@ -30,11 +30,11 @@ GetOptions("m"=> \$mode,
 "f"=> \$file,
 "h"=> \$help);
 sub usage(){
-    print "Multicast traffic checkern";
+    print "Multicast traffic checker\n";
     print "==================================n";
     print "Flags:n";
-    print "-m 0 is default  1 is writing to databasen";
-    print "-f file with data   data type is  name,ipaddr by default ch.txtn";
+    print "-m 0 is default  1 is writing to database\n";
+    print "-f file with data   data type is  name,ipaddr by default ch.txt\n";
     print "-h Print this pagen";
     exit();
 }
@@ -73,9 +73,9 @@ if($mode==0){
             
             $sock = IO::Socket::Multicast->new(Proto=>'udp',LocalAddr=> $link,LocalPort => $port,ReuseAddr => 1,ReusePort => 1,TimeOut => 7) or print "Error Open Socket"
             ;
-            $sock->mcast_add($link,$interface) or print "Couldn't set group: $!n";
+            $sock->mcast_add($link,$interface) or print "Couldn't set group: $!\n";
             alarm(5);
-            $sock->recv($data,4096) or print "Couldn't receive data $!n";
+            $sock->recv($data,4096) or print "Couldn't receive data $!\n";
             $SIG{ALRM} = sub {close($sock);};
             
             my $start = time;
