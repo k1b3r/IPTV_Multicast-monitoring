@@ -67,9 +67,9 @@ $dbh = $dbh->clone;
 #my $limit  = $process_num == $max_forks ? '' : int($count/$max_forks);
 my $ost = $count % $max_forks;
 my $limit = int($count/$max_forks);
-my $offset = int($count/$max_forks) * ($process_num - 1);
+my $offset =  int($count/$max_forks) * ($process_num - 1);
 if ($process_num == $max_forks) {
-$offset+=$ost;
+#$offset+=$ost;
 $limit+=$ost;
 }
 $dbh->{InactiveDestroy} = 1;
