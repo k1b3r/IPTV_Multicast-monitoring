@@ -1,7 +1,7 @@
  <?php
 $servername = "localhost";
 $username = "root";
-$password = "xxxxxxxxx";
+$password = "h0d5ym4m2";
 $db = "diag_mcast";
 
 // Create connection
@@ -15,4 +15,6 @@ $db_selected = mysql_select_db($db, $conn);
 if (!$db_selected) {
     die ('Can\'t use db : ' . mysql_error());
 }
+//encoding
+mysql_query("SET NAMES utf8");
 ?>
