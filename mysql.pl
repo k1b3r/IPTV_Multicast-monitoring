@@ -78,6 +78,7 @@ warn "$sql";
 my $sth = $dbh->prepare($sql);
 $sth->execute();
 while ( my ( $id, $name, $link, $interface ) = $sth->fetchrow_array ) {
+   chomp;
     warn "$id :: $name";
 
      $sock = IO::Socket::Multicast->new(
