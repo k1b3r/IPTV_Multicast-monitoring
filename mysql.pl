@@ -4,10 +4,7 @@ use IO::Socket::Multicast;
 use DBI;
 use Data::Dumper;
 use Time::HiRes;
-
-my $port = 5500;
 my $time = 3;
-my $file;
 my $help;
 my $max_forks = 3;
 my $sock;
@@ -15,10 +12,9 @@ my $sock;
 my %config = do 'config.pl';
 
 use Getopt::Long;
-GetOptions(
-    "f" => \$file,
-    "h" => \$help
-);
+my $file;
+GetOptions("f=s" => \$file) or die usage() ;
+GetOptions("h" => \$help);
 
 
 usage() if $help;
@@ -38,13 +34,15 @@ my $dbh = DBI->connect(
 ) or die $DBI::errstr;
 
 
+
 if ( $file ) {
+    print "OK file is:  $file";
     my $i = 0;
     open( DATA, "./$file" ) or die "Couldn't open file $file, $!";
     while (<DATA>) {
-        chomp; my ( $name, $link ) = split(',');
-        $dbh->do('INSERT  INTO chan (id,name,link) VALUES (?,?,?)',
-            undef, $i++, $name, $link);
+        chomp; my ( $name, $link, $port1 ) = split(',');
+        $dbh->do('INSERT  INTO chan (id,name,link,chan_port) VALUES (?,?,?,?)',
+            undef, $i++, $name, $link ,$port1);
     }
     exit;
 }
@@ -73,11 +71,11 @@ if ($process_num == $max_forks) {
 $limit+=$ost;
 }
 $dbh->{InactiveDestroy} = 1;
-my $sql = "SELECT id,name,link,interface FROM chan ORDER BY id LIMIT $limit OFFSET $offset";
+my $sql = "SELECT id,name,link,interface,chan_port FROM chan ORDER BY id LIMIT $limit OFFSET $offset";
 warn "$sql";
 my $sth = $dbh->prepare($sql);
 $sth->execute();
-while ( my ( $id, $name, $link, $interface ) = $sth->fetchrow_array ) {
+while ( my ( $id, $name, $link, $interface, $port ) = $sth->fetchrow_array ) {
    chomp;
     warn "$id :: $name";
 
@@ -89,8 +87,14 @@ while ( my ( $id, $name, $link, $interface ) = $sth->fetchrow_array ) {
         ReusePort => 1,
         TimeOut   => 7
     ) or print "Error Open Socket: $!\n";
-    $sock->mcast_add( $link, $interface )
+     if ($interface) {
+         $sock->mcast_add( $link, $interface )
         or die "Couldn't set group: $!\n";
+     }else{
+        $sock->mcast_add( $link )
+        or die "Couldn't set group: $!\n";
+     }
+    
 my $data;
 my $epoc;
             alarm(5);
@@ -116,9 +120,9 @@ my $epoc;
 
 sub usage() {
     print "Multicast traffic checker\n";
-    print "==================================n";
-    print "Flags:n";
-    print "-f file with data   data type is  name,ipaddr by default ch.txt\n";
-    print "-h Print this pagen";
+    print "==================================\n";
+    print "Flags:\n";
+    print "-f file with data   data type is  name,ipaddr,port like ch.txt\n";
+    print "-h Print this help\n";
     exit();
 }
