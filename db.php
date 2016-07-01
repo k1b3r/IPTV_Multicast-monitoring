@@ -1,7 +1,7 @@
  <?php
 $servername = "localhost";
 $username = "root";
-$password = "h0d5ym4m2";
+$password = "xxxxxxxxx";
 $db = "diag_mcast";
 
 // Create connection
